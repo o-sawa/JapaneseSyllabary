@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = JapaneseSyllabary::VERSION
   spec.authors       = ["o-sawa"]
   spec.email         = ["osawa@val.co.jp"]
-  spec.summary       = %q{���{��̌܏\�����擾}
-  spec.description   = %q{���{��̌܏\�����s���ƂɎ擾���郁�\�b�h�ł�}
+  spec.summary       = %q{日本語の五十音を取得}
+  spec.description   = %q{日本語の五十音を行ごとに取得するメソッドです}
   spec.homepage      = ""
 
   spec.files         = `git ls-files -z`.split("\x0")
