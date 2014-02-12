@@ -51,7 +51,7 @@ EOS
   def columns(row=-1, is_contains_voiced=true)
     column_list = case row
       when String
-        @@syllabary[row]
+        @@syllabary[row] || []
       when Fixnum
         (0...@@syllabary.keys.length).include?(row) ? @@syllabary[@@syllabary.keys[row]] : []
       else
