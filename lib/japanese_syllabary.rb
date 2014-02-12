@@ -59,4 +59,18 @@ EOS
     end
     is_contains_voiced ? column_list : column_list.map{|x| x[0] }.flatten
   end
+  
+  # 対象名称を比較するように変換する（ひらがなオンリー）
+  #   Args
+  #     main  : String
+  def compare_text(main)
+    # 濁点半濁点用
+    @substitution_voiced ||= "tr(\"#{@@syllabary.values.flatten(1).select{|x| x.length > 1 }.map{|x| x[1..-1]}.flatten.join()}\",\"#{ @@syllabary.values.flatten(1).select{|x| x.length > 1 }.map{|x| x[0]*(x.length-1) }.join() }\")"
+    # 拗促音用
+    @substitution_x ||= "tr(\"っぁぃぅぇぉゃゅょゎ\",\"つあいうえおやゆよわ\")"
+    # 伸ばし棒用
+    @substruction_long ||= rows.map.with_index{|x,i| columns(i,false).index('や') ? "gsub(\"やー\",\"やあ\").gsub(\"ゆー\",\"ゆう\").gsub(\"よー\",\"よお\")" : columns(i,false).map.with_index{|y, j| "gsub(\"#{y}ー\",\"#{y}#{columns(0,false)[j]}\")" } }.flatten.join('.')
+
+    eval("main.#{@substitution_voiced}.#{@substitution_x}.#{@substruction_long}")
+  end
 end
