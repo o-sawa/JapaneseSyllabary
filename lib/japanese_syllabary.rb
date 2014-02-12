@@ -69,7 +69,7 @@ EOS
     # 拗促音用
     @substitution_x ||= "tr(\"っぁぃぅぇぉゃゅょゎ\",\"つあいうえおやゆよわ\")"
     # 伸ばし棒用
-    @substruction_long ||= rows.map.with_index{|x,i| columns(i,false).index('や') ? "gsub(\"やー\",\"やあ\").gsub(\"ゆー\",\"ゆう\").gsub(\"よー\",\"よお\")" : columns(i,false).map.with_index{|y, j| "gsub(\"#{y}ー\",\"#{y}#{columns(0,false)[j]}\")" } }.flatten.join('.')
+    @substruction_long ||= rows.map.with_index{|x,i| columns(i,false).index('や') ? "gsub(\"やー\",\"やあ\").gsub(\"ゆー\",\"ゆう\").gsub(\"よー\",\"よう\")" : columns(i,false).map.with_index{|y, j| k = j == 4 ? 2 : j;"gsub(\"#{y}ー\",\"#{y}#{columns(0,false)[k] }\")" } }.flatten.join('.')
 
     eval("main.#{@substitution_voiced}.#{@substitution_x}.#{@substruction_long}")
   end
